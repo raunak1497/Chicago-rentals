@@ -1,8 +1,11 @@
 package com.uic.userservice.model;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@Document(collection = "users")
 public class User {
 
     private String name;
