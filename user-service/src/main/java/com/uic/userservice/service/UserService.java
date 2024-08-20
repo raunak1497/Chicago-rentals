@@ -1,26 +1,39 @@
 package com.uic.userservice.service;
 
+import com.uic.userservice.model.CartItem;
 import com.uic.userservice.model.User;
-import com.uic.userservice.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import com.uic.userservice.model.WishlistItem;
 
-@Service
-public class UserService {
+import java.util.List;
 
-    @Autowired
-    private UserRepository userRepository;
+public interface UserService {
+    User registerUser(User user);
 
-    public User registerUser(User user) {
-        return userRepository.save(user);
-    }
+    boolean validateUserLogin(String email, String rawPassword);
 
+    List<User> getAllUsers();
 
-    public User updateUser(User user) {
-        return userRepository.save(user);
-    }
+    User updateUser(User user);
 
-    public void deleteUser(String id) {
-        userRepository.deleteById(id);
-    }
+    void deleteUser(String id);
+
+    User findUserById(String id);
+
+    List<String> getRentedProductIds(String userId);
+
+    void changePassword(String userId, String oldPassword, String newPassword);
+
+    void resetPassword(String email, String newPassword);
+
+    List<WishlistItem> getUserWishListItems(String userId);
+
+    User addWishlistItem(String userId, WishlistItem wishlistItem);
+
+    void removeWishlistItem(String userId, String productId);
+
+    List<CartItem> getCartItems(String userId);
+
+    User addCartItem(String userId, CartItem cartItem);
+
+    void removeCartItem(String userId, String productId);
 }
