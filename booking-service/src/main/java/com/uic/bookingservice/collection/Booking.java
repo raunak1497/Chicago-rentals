@@ -1,5 +1,4 @@
 package com.uic.bookingservice.collection;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,7 +20,7 @@ public class Booking {
     private LocalTime bookingTime;
     private Double bookingCost;
     private int noOfItems;
-//    private List<Product> productList;
+    //    private List<Product> productList;
     private Status status;
     private String transactionId;
     private Mode paymentMode;

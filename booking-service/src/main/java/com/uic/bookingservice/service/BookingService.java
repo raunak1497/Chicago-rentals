@@ -1,7 +1,6 @@
 package com.uic.bookingservice.service;
 
 import com.uic.bookingservice.collection.Booking;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
