@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Document(collection = "users")
-@AllArgsConstructor
-@NoArgsConstructor
 public class User {
 
     private String name;

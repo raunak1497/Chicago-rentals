@@ -1,13 +1,13 @@
-package com.uic.chicagorentals;
+package com.uic.rentalservice.rental_service;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ChicagoRentalsApplicationTests {
+class RentalServiceApplicationTests {
 
-    @Test
-    void contextLoads() {
-    }
+	@Test
+	void contextLoads() {
+	}
 
 }
