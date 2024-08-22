@@ -1,45 +1,41 @@
 package com.uic.inventoryservice.controller;
 
-import com.uic.inventoryservice.collection.Product;
-import com.uic.inventoryservice.repository.InventoryRepository;
-import com.uic.inventoryservice.service.ProductService;
-import com.uic.inventoryservice.service.ProductServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.uic.inventoryservice.collection.Inventory;
+import com.uic.inventoryservice.collection.Location;
+import com.uic.inventoryservice.service.InventoryService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/inventory")
 public class InventoryController {
 
-    @Autowired
-    private ProductService productService;
+    private InventoryService inventoryService;
 
-    @PostMapping("/product")
-    public Product addProduct(@RequestBody Product product) {
-        return productService.addProduct(product);
+    @PostMapping
+    public void addInventoryEntry(@RequestBody Inventory inventory){
+        inventoryService.addEntry(inventory);
     }
 
-    @GetMapping("/product")
-    public List<Product> getProductsList() {
-        return productService.getProductsList();
+    @GetMapping
+    public List<Inventory> getInventoryList(){
+        return inventoryService.getInventoryList();
     }
 
-    @GetMapping("/product/{id}")
-    public Product getProduct(@PathVariable String id) {
-         return productService.getProduct(id);
+    @GetMapping("/location/{id}")
+    public List<Inventory> getInventoryByLocation(@PathVariable String locationId){
+        return inventoryService.getInventoryByLocation(locationId);
     }
 
-    @DeleteMapping("/product/{id}")
-    public String deleteProduct(@PathVariable String id) {
-        productService.deleteById(id);
-        return "Product deleted successfully";
+    @GetMapping("/product/{code}")
+    public List<Inventory> getInventoryByProduct(@PathVariable String prodCode) {
+        return inventoryService.getInventoryByProduct(prodCode);
     }
 
-    @PutMapping("/product/{id}")
-    public Product updateProduct(@PathVariable String id, @RequestBody Product product) {
-        productService.updateProduct(id,product);
-        return product;
+    @PostMapping({"/{id}"})
+    public void sellProductFromInventory(@RequestBody String id){
+        inventoryService.sellProductFromInventory(id);
     }
 }

@@ -2,6 +2,7 @@ package com.uic.inventoryservice.service;
 
 import com.uic.inventoryservice.collection.Product;
 import com.uic.inventoryservice.repository.InventoryRepository;
+import com.uic.inventoryservice.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,31 +13,31 @@ import java.util.Objects;
 public class ProductServiceImpl implements ProductService {
 
     @Autowired
-    private InventoryRepository inventoryRepository;
+    private ProductRepository productRepository;
 
     @Override()
     public Product addProduct(Product product) {
-         return inventoryRepository.save(product);
+         return productRepository.save(product);
     }
 
     @Override
     public List<Product> getProductsList() {
-        return inventoryRepository.findAll();
+        return productRepository.findAll();
     }
 
     @Override
     public Product getProduct(String id) {
-        return inventoryRepository.findById(id).get();
+        return productRepository.findById(id).get();
     }
 
     @Override
     public void deleteById(String id) {
-        inventoryRepository.deleteById(id);
+        productRepository.deleteById(id);
     }
 
     @Override
     public void updateProduct(String id,Product product){
-        Product prod = inventoryRepository.findById(id).get();
+        Product prod = productRepository.findById(id).get();
 
         if(Objects.nonNull(prod.getProductName()) &&
                 !"".equalsIgnoreCase(prod.getProductName()) ){
@@ -47,6 +48,6 @@ public class ProductServiceImpl implements ProductService {
             prod.setProductPrice(product.getProductPrice());
         }
 
-        inventoryRepository.save(prod);
+        productRepository.save(prod);
     }
 }
