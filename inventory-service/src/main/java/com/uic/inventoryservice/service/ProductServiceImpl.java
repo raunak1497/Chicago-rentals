@@ -1,7 +1,6 @@
 package com.uic.inventoryservice.service;
 
 import com.uic.inventoryservice.collection.Product;
-import com.uic.inventoryservice.repository.InventoryRepository;
 import com.uic.inventoryservice.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

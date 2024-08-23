@@ -1,4 +1,11 @@
-data:
-  mongodb:
-    uri: mongodb://localhost:27017
-    database: booking_service_db
+spring:
+  application:
+    name: booking-service
+
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017
+      database: booking_service_db
+
+server:
+  port: 8082

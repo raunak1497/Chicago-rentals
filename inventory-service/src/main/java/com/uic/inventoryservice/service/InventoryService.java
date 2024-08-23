@@ -16,5 +16,5 @@ public interface InventoryService {
 
     List<Inventory> getInventoryByProduct(String prodCode);
 
-    void sellProductFromInventory(String id);
+//    void sellProductFromInventory(String id);
 }

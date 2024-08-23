@@ -1,4 +1,4 @@
-package com.uic.inventoryservice.collection;
+package com.uic.filterservice.collection;
 
 public enum Category {
     SOFA,

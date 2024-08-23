@@ -1,11 +1,11 @@
 spring:
   application:
-    name: inventory-service
+    name: filter-service
 
   data:
     mongodb:
       uri: mongodb://localhost:27017
-      database: inventory_service_db
+      database: filter_service_db
 
 server:
-  port: 8080
+  port: 8083
