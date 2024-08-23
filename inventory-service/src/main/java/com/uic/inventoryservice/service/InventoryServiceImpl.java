@@ -28,20 +28,18 @@ public class InventoryServiceImpl implements InventoryService {
 
     @Override
     public List<Inventory> getInventoryByLocation(String locationId) {
-        return inventoryRepository.findByLocation(locationId);
+        return inventoryRepository.findByLocationId(locationId);
     }
 
     @Override
     public List<Inventory> getInventoryByProduct(String prodCode) {
-        return inventoryRepository.findByProduct(prodCode);
+        return inventoryRepository.findByProductCode(prodCode);
     }
 
-    @Override
-    public void sellProductFromInventory(String id) {
-       inventoryRepository.sellProductFromInventory(id);
-
-
-    }
+//    @Override
+//    public void sellProductFromInventory(String id) {
+//       inventoryRepository.sellProductFromInventory(id);
+//    }
 
 
 }

@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: inventory-service
+
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017
+      database: inventory_service_db
+
+server:
+  port: 8080

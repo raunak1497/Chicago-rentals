@@ -33,9 +33,9 @@ public class InventoryController {
     public List<Inventory> getInventoryByProduct(@PathVariable String prodCode) {
         return inventoryService.getInventoryByProduct(prodCode);
     }
-
-    @PostMapping({"/{id}"})
-    public void sellProductFromInventory(@RequestBody String id){
-        inventoryService.sellProductFromInventory(id);
-    }
+//
+//    @PostMapping({"/{id}"})
+//    public void sellProductFromInventory(@RequestBody String id){
+//        inventoryService.sellProductFromInventory(id);
+//    }
 }

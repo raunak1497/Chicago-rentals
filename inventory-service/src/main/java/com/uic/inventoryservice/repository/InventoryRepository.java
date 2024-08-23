@@ -12,10 +12,10 @@ import java.util.List;
 
 @Repository
 public interface InventoryRepository extends MongoRepository<Inventory, String> {
-    public List<Inventory> findByLocation(String locationId);
-    public List<Inventory> findByProduct(String prodCode);
+    List<Inventory> findByLocationId(String locationId);
+    List<Inventory> findByProductCode(String prodCode);
 
 
-    @Query(value = "{ '_id': ?0 }", update = "{ '$inc': { 'quantity': ?1 } }")
-    void sellProductFromInventory(String id);
+//    @Query(value = "{ '_id': ?0 }", update = "{ '$inc': { 'quantity': ?1 } }")
+//    void sellProductFromInventory(String id);
 }
