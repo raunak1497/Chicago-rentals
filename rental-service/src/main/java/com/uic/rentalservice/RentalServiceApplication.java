@@ -1,9 +1,11 @@
-package com.uic.rentalservice.rental_service;
+package com.uic.rentalservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @SpringBootApplication
+@EnableFeignClients
 public class RentalServiceApplication {
 
 	public static void main(String[] args) {

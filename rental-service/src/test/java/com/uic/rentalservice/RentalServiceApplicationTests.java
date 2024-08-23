@@ -1,4 +1,4 @@
-package com.uic.rentalservice.rental_service;
+package com.uic.rentalservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
