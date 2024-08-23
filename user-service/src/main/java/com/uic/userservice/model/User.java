@@ -1,5 +1,7 @@
 package com.uic.userservice.model;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
@@ -10,26 +12,54 @@ public class User {
 
     private String name;
 
-    public User(String name, long id, String email, long phone, long SSN, String address) {
+    public User(String name, String id, String email, String phone, String SSN, String address) {
         this.name = name;
         this.id = id;
         this.email = email;
         this.phone = phone;
-        this.SSN = SSN;
+        this.ssn = SSN;
         this.address = address;
+        this.wishlistItems = new ArrayList<>();
+        this.cart = new ArrayList<>();
     }
 
-    private long id;
+    private String id;
 
     private String email;
 
-    private long phone;
+    private String phone;
 
-    private long SSN;
+    private String ssn;
 
     private String address;
 
-    private List<Product> productList = new ArrayList<>();
+    private String passwordHash;
+
+    private List<String> rentedProductIds;
+
+    private List<WishlistItem> wishlistItems;
+
+    private List<CartItem> cart;
+
+    public List<WishlistItem> getWishlistItems() {
+        return wishlistItems;
+    }
+
+
+    public void addWishlistItem(WishlistItem item) {
+        this.wishlistItems.add(item);
+    }
+
+
+    public List<String> getRentedProductIds() {
+        return rentedProductIds;
+    }
+
+    public void setRentedProductIds(List<String> rentedProductIds) {
+        this.rentedProductIds = rentedProductIds;
+    }
+
+
 
     public String getName() {
         return name;
@@ -39,11 +69,11 @@ public class User {
         this.name = name;
     }
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -55,20 +85,20 @@ public class User {
         this.email = email;
     }
 
-    public long getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(long phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
-    public long getSSN() {
-        return SSN;
+    public String getSsn() {
+        return ssn;
     }
 
-    public void setSSN(long SSN) {
-        this.SSN = SSN;
+    public void setSsn(String ssn) {
+        this.ssn = ssn;
     }
 
     public String getAddress() {
@@ -79,5 +109,19 @@ public class User {
         this.address = address;
     }
 
+    public String getPasswordHash() {
+        return passwordHash;
+    }
 
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
+    }
+
+    public List<CartItem> getCartItems() {
+        return cart;
+    }
+
+    public void addCartItem(CartItem cartItem) {
+        this.cart.add(cartItem);
+    }
 }
