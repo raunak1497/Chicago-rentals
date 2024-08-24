@@ -10,7 +10,7 @@ public class Payment {
     @Id
     private String paymentId;
     private String rentalId;
-    private Double price;
+    private Double totalPrice;
     private String cardNumber;
     private String cardHolder;
     private int cardExpirationYear;

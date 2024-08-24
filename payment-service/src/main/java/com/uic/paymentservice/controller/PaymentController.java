@@ -2,6 +2,7 @@ package com.uic.paymentservice.controller;
 
 import com.uic.paymentservice.collection.CreditCardDetails;
 import com.uic.paymentservice.collection.Payment;
+import com.uic.paymentservice.model.PaymentResponse;
 import com.uic.paymentservice.service.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -34,14 +35,10 @@ public class PaymentController {
     }
 
     @PostMapping("/validatePayment")
-    public ResponseEntity<String> validatePayment(@RequestBody Payment payment) {
-        boolean isValid = paymentService.validatePayment(payment);
+    public PaymentResponse validatePayment(@RequestBody Payment payment) {
 
-        if (isValid) {
-            return ResponseEntity.ok("Payment is valid.");
-        } else {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Payment is invalid. Insufficient balance.");
-        }
+        return paymentService.validatePayment(payment);
+
     }
 
     @PostMapping("/verifyCardDetails")

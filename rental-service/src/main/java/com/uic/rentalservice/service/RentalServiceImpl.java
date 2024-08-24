@@ -46,7 +46,7 @@ public class RentalServiceImpl implements RentalService {
         rentalBusinessRules.ensureProductIsAvailable(rental.getId());
 
         //Process payment
-//        rentalBusinessRules.ensurePaymentIsProcessed(rental);
+        rentalBusinessRules.ensurePaymentIsProcessed(rental);
 
         //Generate rental details
         rental.setRentedAt(LocalDate.now());

@@ -2,12 +2,15 @@ package com.uic.paymentservice.service;
 
 import com.uic.paymentservice.collection.CreditCardDetails;
 import com.uic.paymentservice.collection.Payment;
+import com.uic.paymentservice.model.PaymentResponse;
 import com.uic.paymentservice.repository.PaymentRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Slf4j
 @Service
 public class PaymentServiceImpl implements PaymentService {
 
@@ -38,9 +41,21 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     @Override
-    public boolean validatePayment(Payment payment) {
+    public PaymentResponse validatePayment(Payment payment) {
         // Validate if the price is less than or equal to the balance
-        return payment.getPrice() != null && payment.getBalance() >= payment.getPrice();
+        //add payment id
+        //verify card
+//        check bal
+        log.info("Validate payment {}", payment);
+        PaymentResponse paymentResponse = new PaymentResponse();
+        if(payment.getTotalPrice() != null){
+            paymentResponse.setMessage("payment success!");
+            paymentResponse.setSuccess(true);
+        }else{
+            paymentResponse.setMessage("payment failed!");
+            paymentResponse.setSuccess(false);
+        }
+        return paymentResponse;
     }
 
     private boolean isValidLength(String value, int minLength, int maxLength) {

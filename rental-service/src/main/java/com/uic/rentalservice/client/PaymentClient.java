@@ -8,6 +8,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 @FeignClient(name = "payment-service",url = "${payment.service.url}")
 public interface PaymentClient {
 
-    @PostMapping("/payments/process")
+    @PostMapping("/payment/validatePayment")
     PaymentResponse processRentalPayment(@RequestBody Rental rental);
 }
