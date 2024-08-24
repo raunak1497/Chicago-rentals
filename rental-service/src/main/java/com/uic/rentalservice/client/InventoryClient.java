@@ -7,6 +7,6 @@ import org.springframework.cloud.openfeign.FeignClient;
 @FeignClient(name = "inventory-service",url = "${inventory.service.url}")
 public interface InventoryClient {
 
-    @GetMapping("/products/{id}/availability")
+    @GetMapping("/inventory/{id}/availability")
     AvailabilityResponse checkIfProductAvailable(@PathVariable("id") String productId);
 }

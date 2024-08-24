@@ -5,12 +5,14 @@ import com.uic.rentalservice.model.Invoice;
 import com.uic.rentalservice.model.Rental;
 import com.uic.rentalservice.repository.InvoiceRepository;
 import com.uic.rentalservice.repository.RentalRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
 
+@Slf4j
 @Service
 public class RentalServiceImpl implements RentalService {
 
@@ -40,10 +42,11 @@ public class RentalServiceImpl implements RentalService {
     @Override
     public Rental addRental(Rental rental) throws InterruptedException{
         //Check product availability
+        log.info("rental id is {}", rental.getId());
         rentalBusinessRules.ensureProductIsAvailable(rental.getId());
 
         //Process payment
-        rentalBusinessRules.ensurePaymentIsProcessed(rental);
+//        rentalBusinessRules.ensurePaymentIsProcessed(rental);
 
         //Generate rental details
         rental.setRentedAt(LocalDate.now());

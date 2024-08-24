@@ -6,9 +6,11 @@ import com.uic.rentalservice.client.InventoryClient;
 import com.uic.rentalservice.exception.BusinessException;
 import com.uic.rentalservice.model.Rental;
 import com.uic.rentalservice.repository.RentalRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+@Slf4j
 @Service
 public class RentalBusinessRules {
 
@@ -33,6 +35,8 @@ public class RentalBusinessRules {
     }
 
     public void ensureProductIsAvailable(String productId) throws InterruptedException {
+        log.info("Checking if product is available");
+        log.info("podcut id is {}", productId);
         var response = inventoryClient.checkIfProductAvailable(productId);
         if (!response.isSuccess()) {
             throw new BusinessException(response.getMessage());
