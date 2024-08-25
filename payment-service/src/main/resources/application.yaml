@@ -1,11 +1,10 @@
 spring:
   application:
     name: payment-service
+  config:
+    import: "optional:configserver:http://localhost:8088"
 
   data:
     mongodb:
       uri: mongodb://localhost:27017
       database: payment_service_db
-
-server:
-  port: 8086
