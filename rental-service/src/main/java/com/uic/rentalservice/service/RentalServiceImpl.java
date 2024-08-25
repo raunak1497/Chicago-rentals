@@ -1,5 +1,6 @@
 package com.uic.rentalservice.service;
 
+import com.uic.rentalservice.constant.RentalConstants;
 import com.uic.rentalservice.exception.RentalNotFoundException;
 import com.uic.rentalservice.model.Invoice;
 import com.uic.rentalservice.model.Rental;
@@ -7,6 +8,7 @@ import com.uic.rentalservice.repository.InvoiceRepository;
 import com.uic.rentalservice.repository.RentalRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -19,6 +21,9 @@ public class RentalServiceImpl implements RentalService {
     private final RentalRepository rentalRepository;
     private final RentalBusinessRules rentalBusinessRules;
     private final InvoiceRepository invoiceRepository;
+
+    @Autowired
+    private KafkaTemplate<String,Object> kafkaTemplate;
 
     @Autowired
     public RentalServiceImpl(RentalRepository rentalRepository, RentalBusinessRules rentalBusinessRules, InvoiceRepository invoiceRepository) {
@@ -42,6 +47,7 @@ public class RentalServiceImpl implements RentalService {
     @Override
     public Rental addRental(Rental rental) throws InterruptedException{
         //Check product availability
+//        ->add separate rental id, pass product
         log.info("rental id is {}", rental.getId());
         rentalBusinessRules.ensureProductIsAvailable(rental.getId());
 
@@ -52,6 +58,7 @@ public class RentalServiceImpl implements RentalService {
         rental.setRentedAt(LocalDate.now());
         rental.setTotalPrice(rental.getDailyPrice() * rental.getRentedForDays());
         Rental savedRental = rentalRepository.save(rental);
+        kafkaTemplate.send(RentalConstants.RENTAL_TOPIC, savedRental.getId());
 
         //Generate invoice
         Invoice invoice = new Invoice();

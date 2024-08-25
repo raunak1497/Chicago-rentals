@@ -8,6 +8,7 @@ import com.uic.rentalservice.model.Rental;
 import com.uic.rentalservice.repository.RentalRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 @Slf4j
@@ -18,6 +19,9 @@ public class RentalBusinessRules {
     private final InventoryClient inventoryClient;
     private final PaymentClient paymentClient;
     private final PaymentRetryUtil paymentRetryUtil;
+
+    @Autowired
+    private KafkaTemplate<String,Object> kafkaTemplate;
 
     @Autowired
     public RentalBusinessRules(RentalRepository rentalRepository, InventoryClient inventoryClient,
