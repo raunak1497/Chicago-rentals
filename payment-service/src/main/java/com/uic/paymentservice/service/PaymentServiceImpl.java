@@ -45,7 +45,7 @@ public class PaymentServiceImpl implements PaymentService {
         // Validate if the price is less than or equal to the balance
         //add payment id
         //verify card
-//        check bal
+        // check bal
         log.info("Validate payment {}", payment);
         PaymentResponse paymentResponse = new PaymentResponse();
         if(payment.getTotalPrice() != null){
