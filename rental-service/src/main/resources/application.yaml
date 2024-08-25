@@ -16,7 +16,6 @@ inventory:
   service:
     url: http://localhost:8080
 
-
 payment:
   service:
     url: http://localhost:8086

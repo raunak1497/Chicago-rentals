@@ -10,6 +10,7 @@
         <module name="config-server" />
         <module name="inventory-service" />
         <module name="payment-service" />
+        <module name="booking-service" />
         <module name="filter-service" />
         <module name="rental-service" />
         <module name="user-service" />
@@ -30,6 +31,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="booking-service" options="-parameters" />
       <module name="config-server" options="-parameters" />
       <module name="filter-service" options="-parameters" />
       <module name="inventory-service" options="-parameters" />

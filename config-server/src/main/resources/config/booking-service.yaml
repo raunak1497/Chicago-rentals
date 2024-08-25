@@ -1,2 +1,12 @@
 server:
   port: 8082
+
+eureka:
+  client:
+    enabled: false
+
+spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017
+      database: booking_service_db
