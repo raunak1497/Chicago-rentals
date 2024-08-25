@@ -10,6 +10,3 @@ spring:
 eureka:
   client:
     enabled: false
-
-server:
-  port: 8081
