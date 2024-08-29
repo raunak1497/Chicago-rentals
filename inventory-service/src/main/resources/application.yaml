@@ -3,6 +3,13 @@ spring:
     name: inventory-service
   config:
     import: "optional:configserver:http://localhost:8088"
+  kafka:
+    consumer:
+      bootstrap-servers: localhost:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      group-id: rental-group
+      auto-offset-reset: earliest
 
   data:
     mongodb:

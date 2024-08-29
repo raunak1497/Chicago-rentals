@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+
 @Slf4j
 @Service
 public class RentalBusinessRules {
@@ -20,8 +22,8 @@ public class RentalBusinessRules {
     private final PaymentClient paymentClient;
     private final PaymentRetryUtil paymentRetryUtil;
 
-    @Autowired
-    private KafkaTemplate<String,Object> kafkaTemplate;
+//    @Autowired
+//    private KafkaTemplate<String,Object> kafkaTemplate;
 
     @Autowired
     public RentalBusinessRules(RentalRepository rentalRepository, InventoryClient inventoryClient,
@@ -38,10 +40,9 @@ public class RentalBusinessRules {
         }
     }
 
-    public void ensureProductIsAvailable(String productId) throws InterruptedException {
+    public void ensureProductIsAvailable(HashMap<String,Integer> products) throws InterruptedException {
         log.info("Checking if product is available");
-        log.info("podcut id is {}", productId);
-        var response = inventoryClient.checkIfProductAvailable(productId);
+        var response = inventoryClient.checkIfProductAvailable(products);
         if (!response.isSuccess()) {
             throw new BusinessException(response.getMessage());
         }

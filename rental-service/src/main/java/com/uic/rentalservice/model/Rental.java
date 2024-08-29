@@ -8,6 +8,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import java.time.LocalDate;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Setter
@@ -17,7 +18,8 @@ import java.util.List;
 @Document(collection = "rentals")
 public class Rental {
     @Id
-    private String id;
+    private String rentalId;
+    private HashMap<String,Integer> products;
     private String userId;
     private double dailyPrice;
     private double totalPrice;

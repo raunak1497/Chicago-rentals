@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,10 +40,10 @@ public class InventoryController {
         return inventoryService.getInventoryByProduct(prodCode);
     }
 
-    @GetMapping({"/{id}/availability"})
-    public AvailabilityResponse checkIfProductAvailable(@PathVariable("id") String id){
+    @PostMapping({"/availability"})
+    public AvailabilityResponse checkIfProductAvailable(@RequestBody HashMap<String,Integer> products){
         log.info("Inside checkIfProductAvailable");
-        return inventoryService.checkIfProductAvailable(id);
+        return inventoryService.checkIfProductAvailable(products);
     }
 
 }

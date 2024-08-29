@@ -23,7 +23,7 @@ public class RentalServiceImpl implements RentalService {
     private final InvoiceRepository invoiceRepository;
 
     @Autowired
-    private KafkaTemplate<String,Object> kafkaTemplate;
+    private KafkaTemplate<String,Rental> kafkaTemplate;
 
     @Autowired
     public RentalServiceImpl(RentalRepository rentalRepository, RentalBusinessRules rentalBusinessRules, InvoiceRepository invoiceRepository) {
@@ -47,9 +47,8 @@ public class RentalServiceImpl implements RentalService {
     @Override
     public Rental addRental(Rental rental) throws InterruptedException{
         //Check product availability
-//        ->add separate rental id, pass product
-        log.info("rental id is {}", rental.getId());
-        rentalBusinessRules.ensureProductIsAvailable(rental.getId());
+        log.info("rental id is {}", rental.getRentalId());
+        rentalBusinessRules.ensureProductIsAvailable(rental.getProducts());
 
         //Process payment
         rentalBusinessRules.ensurePaymentIsProcessed(rental);
@@ -58,11 +57,11 @@ public class RentalServiceImpl implements RentalService {
         rental.setRentedAt(LocalDate.now());
         rental.setTotalPrice(rental.getDailyPrice() * rental.getRentedForDays());
         Rental savedRental = rentalRepository.save(rental);
-        kafkaTemplate.send(RentalConstants.RENTAL_TOPIC, savedRental.getId());
+        kafkaTemplate.send(RentalConstants.RENTAL_TOPIC, savedRental);
 
         //Generate invoice
         Invoice invoice = new Invoice();
-        invoice.setRentalId(savedRental.getId());
+        invoice.setRentalId(savedRental.getRentalId());
         invoice.setTotalPrice(savedRental.getTotalPrice());
         invoice.setStatus("PAID");
         invoiceRepository.save(invoice);
@@ -73,7 +72,7 @@ public class RentalServiceImpl implements RentalService {
     @Override
     public Rental updateRental(String id, Rental rental) {
         rentalBusinessRules.checkIfRentalExists(id);
-        rental.setId(id);
+        rental.setRentalId(id);
         return rentalRepository.save(rental);
     }
 

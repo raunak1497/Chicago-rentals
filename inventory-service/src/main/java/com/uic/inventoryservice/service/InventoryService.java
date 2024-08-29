@@ -5,6 +5,7 @@ import com.uic.inventoryservice.collection.Inventory;
 import com.uic.inventoryservice.collection.Location;
 import com.uic.inventoryservice.model.AvailabilityResponse;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,7 +18,8 @@ public interface InventoryService {
 
     List<Inventory> getInventoryByProduct(String prodCode);
 
-    AvailabilityResponse checkIfProductAvailable(String id);
+    AvailabilityResponse checkIfProductAvailable(HashMap<String,Integer> product);
+
 
 //    void sellProductFromInventory(String id);
 }
